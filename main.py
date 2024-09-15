@@ -1,8 +1,10 @@
 from admin import Admin
 from tkinter import *
-import Data 
-def login():
-    Data.login(number1.get(),number2.get())
+from Data import *
+
+
+def check_log():
+    login(number1.get(),number2.get())
 
 
 window=Tk()
@@ -28,7 +30,7 @@ name = Label(frame_name,text = "Username",background=backgrounf_color_home).pack
 e1 = Entry(frame_name,textvariable=number1).pack(side=RIGHT) 
 password = Label(frame_password,text = "Password",background=backgrounf_color_home).pack(side=LEFT)   
 e2 = Entry(frame_password,show="*",textvariable=number2).pack(side=RIGHT)
-submit = Button(window, text = "Connect",command=login).place(relx=0.52, rely=0.8, anchor="center")
+submit = Button(window, text = "Connect",command=check_log).place(relx=0.52, rely=0.8, anchor="center")
 
 
 

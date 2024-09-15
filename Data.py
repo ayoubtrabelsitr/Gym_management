@@ -1,6 +1,6 @@
 import mysql.connector
 from tkinter import messagebox
-
+from application import app
 cnx = mysql.connector.connect(user='root', password='',
                                 host='127.0.0.1',
                                 database='brothers_gym')
@@ -23,10 +23,12 @@ def login(username,password):
         print
         if username == valueUsername and password == valuePassword:
             print("Connected ")
-            return True
+            app()
+           
         else : 
             game_over = messagebox.showinfo ( "Erreur" , "Vérifiez votre mail ou mot de passe" )
-            return False    
+            
+               
     except:  
         cnx.rollback()  
     
