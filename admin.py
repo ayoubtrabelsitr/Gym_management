@@ -23,5 +23,3 @@ class Admin:
     def ajouterAdmin(self):
         query = "INSERT INTO admins VALUES(%s, %s, %s)"
         return query
-    def checkAdmin(self):
-        return self.username,self.password

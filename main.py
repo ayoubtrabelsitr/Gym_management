@@ -1,32 +1,9 @@
 from admin import Admin
 from tkinter import *
-import mysql.connector
-
-e11 = e22 = ""
+import Data 
 def login():
-    bouda = Admin(78,"ayoub","123")
-    username = number1.get()
-    password = number2.get()
-    cursor = cnx.cursor()
+    Data.login(number1.get(),number2.get())
 
-    try:  
-        #Reading the admins data      
-        cursor.execute("select * from admins")  
-    
-        #fetching the rows from the cursor object  
-        result = cursor.fetchall()  
-  
-        valueUsername = result[0][1]
-        valuePassword = result[0][2]
-        print(valueUsername)
-        print(valuePassword)
-        print
-        if username == valueUsername and password == valuePassword:
-            print("Connected ")
-        else : 
-            print("wrong mail or password")    
-    except:  
-        cnx.rollback()  
 
 window=Tk()
 frame_name = Frame(window)
@@ -53,9 +30,6 @@ password = Label(frame_password,text = "Password",background=backgrounf_color_ho
 e2 = Entry(frame_password,show="*",textvariable=number2).pack(side=RIGHT)
 submit = Button(window, text = "Connect",command=login).place(relx=0.52, rely=0.8, anchor="center")
 
-cnx = mysql.connector.connect(user='root', password='',
-                                host='127.0.0.1',
-                                database='brothers_gym')
 
 
 window.mainloop()
