@@ -41,8 +41,6 @@ def login(username, password):
 
         valueUsername = result[0][1]
         valuePassword = result[0][2]
-        print(valueUsername)
-        print(valuePassword)
         print
         if username == valueUsername and password == valuePassword:
             print("Connected ")
