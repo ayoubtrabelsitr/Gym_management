@@ -69,21 +69,22 @@ def modifyUsers():
     total_columns = len(data[0])
     # create root window
     root = Tk()
-    root.title("Liste des membres")
+    root.title("Modifier des membres")
     # code for creating table
     information = ["ID","NOM","PRENOM","EMAIL","TELEPHONE","ADRESSE","PAIEMENT"]
     for i in range (7):            
-        entre = Entry(root, width=18, fg='red',font=('Arial',14,'bold'))
-        entre.grid(row=0, column=i)
-        entre.insert(END, str(information[i]))
+        entre = Button(root, width=16, fg='red',font=('Arial',12,'bold'),text=str(information[i]))
+        entre.grid(row=0, column=i+1)
 
     for i in range(total_rows):
         for j in range(total_columns):
                 
-            entre = Entry(root, width=18, fg='blue',font=('Arial',14,'bold'))
-            entre.grid(row=i+1, column=j)
+            entre = Entry(root, width=16, fg='black',font=('Arial',12,'bold'))
+            entre.grid(row=i+1, column=j+1)
             entre.insert(END, str(data[i][j]))
-
+    for j in range (total_rows):
+        entre = Button(root, width=16, fg='red', font=('Arial',12,'bold'), text="Modifier")
+        entre.grid(row=j+1, column=0) 
 def addUser():
     return 0
 
@@ -113,8 +114,8 @@ def app():
 
     submit = Button(window2, text="Consulter la liste des membres",bg=backgrounf_color_buttons, command=searchUsers).place(x=50, y=80)
     submit2 = Button(window2, text="Supprimer des membres",bg=backgrounf_color_buttons, command=deleteUsers).place(x=50, y=150)
-    submit3 = Button(window2, text="Y",bg=backgrounf_color_buttons).place(x=50, y=210)
-    submit4 = Button(window2, text="Z",bg=backgrounf_color_buttons).place(x=50, y=280)
+    submit3 = Button(window2, text="Ajouter des membres",bg=backgrounf_color_buttons).place(x=50, y=210)
+    submit4 = Button(window2, text="Modifier des membres",bg=backgrounf_color_buttons,command=modifyUsers).place(x=50, y=280)
 
 
     submit5= Button(window2, text="Quitter",bg='red',command=exit).place(x=350, y=380)
