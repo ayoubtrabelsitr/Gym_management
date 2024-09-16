@@ -6,8 +6,9 @@ import application
 def check_log():
     verify = Data.login(number1.get(), number2.get())
     if verify:
-        window.destroy()
+        window.withdraw()
         application.app()
+
 
 
 window = Tk()
@@ -26,22 +27,15 @@ window.config(bg=backgrounf_color_home)
 width = height = 180
 image_home = PhotoImage(file="jeu.png").subsample(3)
 canvas = Canvas(
-    window, width=width, height=height, bg=backgrounf_color_home, highlightthickness=0
-)
+window, width=width, height=height, bg=backgrounf_color_home, highlightthickness=0)
 canvas.create_image(width / 2, height / 2, image=image_home)
 canvas.place(relx=0.5, rely=0.3, anchor="center")
 
-name = Label(frame_name, text="Username", background=backgrounf_color_home).pack(
-    side=LEFT
-)
+name = Label(frame_name, text="Username", background=backgrounf_color_home).pack(side=LEFT)
 e1 = Entry(frame_name, textvariable=number1).pack(side=RIGHT)
-password = Label(
-    frame_password, text="Password", background=backgrounf_color_home
-).pack(side=LEFT)
+password = Label(frame_password, text="Password", background=backgrounf_color_home).pack(side=LEFT)
 e2 = Entry(frame_password, show="*", textvariable=number2).pack(side=RIGHT)
-submit = Button(window, text="Connect", command=check_log).place(
-    relx=0.52, rely=0.8, anchor="center"
-)
+submit = Button(window, text="Connect", command=check_log).place(relx=0.52, rely=0.8, anchor="center")
 
 
 window.mainloop()

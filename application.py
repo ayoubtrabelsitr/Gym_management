@@ -75,13 +75,17 @@ def modifyUsers():
 def addUser():
     return 0
 
+def getWindow():
+    from main import getwindow
+    return getwindow()
 
 def updateUser():
     return 0 
 
 
-def app():
 
+def app():
+   
     window2 = Tk()
     frame_name = Frame(window2)
     frame_name.place(relx=0.5, rely=0.6, anchor="center")
@@ -100,3 +104,5 @@ def app():
     submit3 = Button(window2, text="Y",bg=backgrounf_color_buttons).place(x=50, y=210)
     submit4 = Button(window2, text="Z",bg=backgrounf_color_buttons).place(x=50, y=280)
 
+
+    submit5= Button(window2, text="Quitter",bg=backgrounf_color_buttons,command=exit).place(x=350, y=380)
