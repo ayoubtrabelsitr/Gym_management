@@ -53,3 +53,16 @@ def login(username, password):
 
     except:
         cnx.rollback()
+def deleteUser(id):
+    import application
+
+    cursor = cnx.cursor()
+
+    try:
+        # Reading the admins data
+        cursor.execute("delete from users WHERE id='{}'".format(id))
+        cnx.commit()
+        application.deleteUsers()
+        
+    except:
+        cnx.rollback()

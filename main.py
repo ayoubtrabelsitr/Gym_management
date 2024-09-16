@@ -6,7 +6,7 @@ import application
 def check_log():
     verify = Data.login(number1.get(), number2.get())
     if verify:
-        window.withdraw()
+        window.destroy()
         application.app()
 
 

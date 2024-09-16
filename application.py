@@ -13,21 +13,32 @@ def searchUsers():
     root.title("Liste des membres")
     # code for creating table
     information = ["ID","NOM","PRENOM","EMAIL","TELEPHONE","ADRESSE","PAIEMENT"]
-    for i in range (7):            
-        button = Button(root, width=16, fg='red',font=('Arial',12,'bold'),text=information[i])
-        button.grid(row=0, column=i)
+    for i in range (7):  
+        if i==3:
+            button = Button(root, width=24, fg='red',font=('Arial',11,'bold'),text=information[i])
+            button.grid(row=0, column=i)
+        else : 
+            button = Button(root, width=13, fg='red',font=('Arial',11,'bold'),text=information[i])
+            button.grid(row=0, column=i)
 
     for i in range(total_rows):
         for j in range(total_columns):  
-            button = Button(root, width=16, fg='black',font=('Arial',12,'bold'),text=str(data[i][j]))
-            button.grid(row=i+1, column=j)
+            if j==3:
+                button = Button(root, width=24, fg='black',font=('Arial',11,'bold'),text=str(data[i][j]),anchor="w")
+                button.grid(row=i+1, column=j)
+            else :    
+                button = Button(root, width=13, fg='black',font=('Arial',11,'bold'),text=str(data[i][j]))
+                button.grid(row=i+1, column=j)
 
 def deleteUsers():
-    
     import Data
     data = Data.search()     
     # find total number of rows and
     # columns in list
+    def check_window_state(window):
+        state = window.state()
+        if state == 'normal':
+            window.destroy()
     total_rows = len(data)
     total_columns = len(data[0])
     # create root window
@@ -39,14 +50,15 @@ def deleteUsers():
         entre = Button(root, width=14, fg='blue',font=('Arial',12,'bold'),text=str(information[i]))
         entre.grid(row=0, column=i+1)
         
-    for j in range (total_rows):
-        entre = Button(root,width=14, fg='red',font=('Arial',12,'bold'),text="X")
-        entre.grid(row=j+1, column=0)  
+
     for i in range(total_rows):
         for j in range(total_columns):
             entre = Button(root, width=14, fg='black',font=('Arial',12,'bold'),text=str(data[i][j]))
             entre.grid(row=i+1, column=j+1)  
-         
+    for j in range (total_rows):
+        entre = Button(root, width=14, fg='red', font=('Arial',12,'bold'), text="X", command=lambda j=j: (Data.deleteUser(data[j][0]), check_window_state(root))) 
+        entre.grid(row=j+1, column=0)  
+ 
 def modifyUsers():
     
     import Data
@@ -105,4 +117,4 @@ def app():
     submit4 = Button(window2, text="Z",bg=backgrounf_color_buttons).place(x=50, y=280)
 
 
-    submit5= Button(window2, text="Quitter",bg=backgrounf_color_buttons,command=exit).place(x=350, y=380)
+    submit5= Button(window2, text="Quitter",bg='red',command=exit).place(x=350, y=380)
