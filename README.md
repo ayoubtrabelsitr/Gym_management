@@ -32,7 +32,7 @@ BrothersGym est une application de gestion d'une salle de sport qui permet aux a
    pip install mysql-connector-python
 3. Configurez la base de données MySQL avec les tables appropriées.
 
- ## Utilisation
+## Utilisation
 
  
 1. Lancez l'application :
@@ -41,4 +41,5 @@ BrothersGym est une application de gestion d'une salle de sport qui permet aux a
 2. Connectez-vous avec vos identifiants d'administrateur.
 3. Utilisez le menu pour gérer les membres.
 
-   ## Captures
+## Captures
+
