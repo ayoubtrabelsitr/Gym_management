@@ -64,38 +64,30 @@ def modifyUsers():
 
     total_rows = len(data)
     total_columns = len(data[0])
-
-    # Liste pour stocker les références des Entry
     entry_list = []
 
-    # Créer la fenêtre root
     root = Tk()
     root.title("Modifier des membres")
     
-    # Créer les en-têtes des colonnes
     information = ["ID", "NOM", "PRENOM", "EMAIL", "TELEPHONE", "ADRESSE", "PAIEMENT"]
     for i in range(7):
         entre = Button(root, width=14, fg='red', font=('Arial', 12, 'bold'), text=str(information[i]))
         entre.grid(row=0, column=i+1)
 
-    # Créer les Entry et stocker les références dans la liste entry_list
     for i in range(total_rows):
         row_entries = []
         for j in range(total_columns):
             entry = Entry(root, width=14, fg='black', font=('Arial', 12, 'bold'))
             entry.grid(row=i+1, column=j+1)
-            entry.insert(END, str(data[i][j]))  # Insérer la valeur existante
-            row_entries.append(entry)  # Ajouter chaque Entry à la liste de la ligne
-        entry_list.append(row_entries)  # Ajouter chaque ligne d'Entries dans la liste principale
+            entry.insert(END, str(data[i][j]))  
+            row_entries.append(entry) 
+        entry_list.append(row_entries)  
 
-    # Fonction pour récupérer et envoyer les valeurs modifiées
     def submit_modifications(index):
-        # Récupérer les nouvelles valeurs des Entry pour la ligne donnée
         modified_values = [entry.get() for entry in entry_list[index]]
-        Data.modifyUser(data[index][0], modified_values)  # Envoi à la fonction de modification
+        Data.modifyUser(data[index][0], modified_values) 
         check_window_state(root)
 
-    # Créer les boutons "Modifier" et associer à la fonction submit_modifications
     for j in range(total_rows):
         entre = Button(root, width=16, fg='red', font=('Arial', 12, 'bold'), text="Modifier",
                        command=lambda j=j: submit_modifications(j))
