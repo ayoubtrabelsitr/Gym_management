@@ -57,17 +57,17 @@ def deleteUser(id):
     except:
         cnx.rollback()
 
-def modifyUser(id,info):
+def modifyUser(id, info):
     import application
-
     cursor = cnx.cursor()
 
     try:
-        print(info[1])
-        print(info[2])
-        cursor.execute("UPDATE users SET nom = '{}', prenom = '{}', email = '{}', telephone = '{}',adresse = '{}', paiement = '{}' WHERE id = '{}'".format(info[1],info[2],info[3],info[4],info[5],info[0]))
+        # Requête SQL pour modifier les informations de l'utilisateur
+        cursor.execute("UPDATE users SET nom = %s, prenom = %s, email = %s, telephone = %s, adresse = %s, paiement = %s WHERE id = %s",
+                       (info[1], info[2], info[3], info[4], info[5], info[6], id))
         cnx.commit()
         application.modifyUsers()
         
-    except:
-        cnx.rollback()        
+    except Exception as e:
+        print(f"Erreur lors de la modification : {e}")
+        cnx.rollback()

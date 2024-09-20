@@ -54,34 +54,52 @@ def deleteUsers():
 
  
 def modifyUsers():
-    def affiche(tab):
-        print(tab) 
-    import Data
-    data = Data.search()     
     def check_window_state(window):
         state = window.state()
         if state == 'normal':
             window.destroy()
-    # columns in list
+
+    import Data
+    data = Data.search()
+
     total_rows = len(data)
     total_columns = len(data[0])
-    # create root window
+
+    # Liste pour stocker les références des Entry
+    entry_list = []
+
+    # Créer la fenêtre root
     root = Tk()
     root.title("Modifier des membres")
-    information = ["ID","NOM","PRENOM","EMAIL","TELEPHONE","ADRESSE","PAIEMENT"]
-    for i in range (7):            
-        entre = Button(root, width=14, fg='red',font=('Arial',12,'bold'),text=str(information[i]))
+    
+    # Créer les en-têtes des colonnes
+    information = ["ID", "NOM", "PRENOM", "EMAIL", "TELEPHONE", "ADRESSE", "PAIEMENT"]
+    for i in range(7):
+        entre = Button(root, width=14, fg='red', font=('Arial', 12, 'bold'), text=str(information[i]))
         entre.grid(row=0, column=i+1)
 
+    # Créer les Entry et stocker les références dans la liste entry_list
     for i in range(total_rows):
+        row_entries = []
         for j in range(total_columns):
-                
-            entre = Entry(root, width=14, fg='black',font=('Arial',12,'bold'))
-            entre.grid(row=i+1, column=j+1)
-            entre.insert(END, str(data[i][j]))
-    for j in range (total_rows):
-        entre = Button(root, width=16, fg='red', font=('Arial',12,'bold'), text="Modifier",command=lambda j=j: (Data.modifyUser(data[j][0],data[j][:]), check_window_state(root),affiche(StringVar(data[j][:]))))
-        entre.grid(row=j+1, column=0) 
+            entry = Entry(root, width=14, fg='black', font=('Arial', 12, 'bold'))
+            entry.grid(row=i+1, column=j+1)
+            entry.insert(END, str(data[i][j]))  # Insérer la valeur existante
+            row_entries.append(entry)  # Ajouter chaque Entry à la liste de la ligne
+        entry_list.append(row_entries)  # Ajouter chaque ligne d'Entries dans la liste principale
+
+    # Fonction pour récupérer et envoyer les valeurs modifiées
+    def submit_modifications(index):
+        # Récupérer les nouvelles valeurs des Entry pour la ligne donnée
+        modified_values = [entry.get() for entry in entry_list[index]]
+        Data.modifyUser(data[index][0], modified_values)  # Envoi à la fonction de modification
+        check_window_state(root)
+
+    # Créer les boutons "Modifier" et associer à la fonction submit_modifications
+    for j in range(total_rows):
+        entre = Button(root, width=16, fg='red', font=('Arial', 12, 'bold'), text="Modifier",
+                       command=lambda j=j: submit_modifications(j))
+        entre.grid(row=j+1, column=0)
 
 
 
