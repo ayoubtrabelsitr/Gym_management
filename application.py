@@ -4,14 +4,10 @@ def searchUsers():
 
     import Data
     data = Data.search()     
-    # find total number of rows and
-    # columns in list
     total_rows = len(data)
     total_columns = len(data[0])
-    # create root window
     root = Tk()
     root.title("Liste des membres")
-    # code for creating table
     information = ["ID","NOM","PRENOM","EMAIL","TELEPHONE","ADRESSE","PAIEMENT"]
     for i in range (7):  
         if i==3:
@@ -33,18 +29,15 @@ def searchUsers():
 def deleteUsers():
     import Data
     data = Data.search()     
-    # find total number of rows and
-    # columns in list
     def check_window_state(window):
         state = window.state()
         if state == 'normal':
             window.destroy()
+
     total_rows = len(data)
     total_columns = len(data[0])
-    # create root window
     root = Tk()
     root.title("Supprimer des membres")
-    # code for creating table
     information = ["ID","NOM","PRENOM","EMAIL","TELEPHONE","ADRESSE","PAIEMENT"]
     for i in range (7):            
         entre = Button(root, width=14, fg='blue',font=('Arial',12,'bold'),text=str(information[i]))
@@ -58,33 +51,40 @@ def deleteUsers():
     for j in range (total_rows):
         entre = Button(root, width=14, fg='red', font=('Arial',12,'bold'), text="X", command=lambda j=j: (Data.deleteUser(data[j][0]), check_window_state(root))) 
         entre.grid(row=j+1, column=0)  
+
  
 def modifyUsers():
-    
+    def affiche(tab):
+        print(tab) 
     import Data
     data = Data.search()     
-    # find total number of rows and
+    def check_window_state(window):
+        state = window.state()
+        if state == 'normal':
+            window.destroy()
     # columns in list
     total_rows = len(data)
     total_columns = len(data[0])
     # create root window
     root = Tk()
     root.title("Modifier des membres")
-    # code for creating table
     information = ["ID","NOM","PRENOM","EMAIL","TELEPHONE","ADRESSE","PAIEMENT"]
     for i in range (7):            
-        entre = Button(root, width=16, fg='red',font=('Arial',12,'bold'),text=str(information[i]))
+        entre = Button(root, width=14, fg='red',font=('Arial',12,'bold'),text=str(information[i]))
         entre.grid(row=0, column=i+1)
 
     for i in range(total_rows):
         for j in range(total_columns):
                 
-            entre = Entry(root, width=16, fg='black',font=('Arial',12,'bold'))
+            entre = Entry(root, width=14, fg='black',font=('Arial',12,'bold'))
             entre.grid(row=i+1, column=j+1)
             entre.insert(END, str(data[i][j]))
     for j in range (total_rows):
-        entre = Button(root, width=16, fg='red', font=('Arial',12,'bold'), text="Modifier")
+        entre = Button(root, width=16, fg='red', font=('Arial',12,'bold'), text="Modifier",command=lambda j=j: (Data.modifyUser(data[j][0],data[j][:]), check_window_state(root),affiche(StringVar(data[j][:]))))
         entre.grid(row=j+1, column=0) 
+
+
+
 def addUser():
     return 0
 
