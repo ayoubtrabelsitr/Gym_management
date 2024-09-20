@@ -24,7 +24,6 @@ def login(username, password):
     cursor = cnx.cursor()
 
     try:
-        # Reading the admins data
         cursor.execute("select * from admins")
 
         # fetching the rows from the cursor object
@@ -62,7 +61,6 @@ def modifyUser(id, info):
     cursor = cnx.cursor()
 
     try:
-        # Requête SQL pour modifier les informations de l'utilisateur
         cursor.execute("UPDATE users SET nom = %s, prenom = %s, email = %s, telephone = %s, adresse = %s, paiement = %s WHERE id = %s",
                        (info[1], info[2], info[3], info[4], info[5], info[6], id))
         cnx.commit()
@@ -70,4 +68,18 @@ def modifyUser(id, info):
         
     except Exception as e:
         print(f"Erreur lors de la modification : {e}")
+        cnx.rollback()
+
+
+def addUser(info):
+    import application
+    cursor = cnx.cursor()
+
+    try:
+        cursor.execute("INSERT INTO users (nom, prenom, email, telephone, adresse, paiement) VALUES (%s, %s, %s, %s, %s, %s)",
+                       (info[1], info[2], info[3], info[4], info[5], info[6]))
+        cnx.commit()
+        application.addUser()
+    except Exception as e:
+        print(f"Erreur lors de l'ajout : {e}")
         cnx.rollback()

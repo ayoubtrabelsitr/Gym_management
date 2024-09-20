@@ -43,7 +43,6 @@ def deleteUsers():
         entre = Button(root, width=14, fg='blue',font=('Arial',12,'bold'),text=str(information[i]))
         entre.grid(row=0, column=i+1)
         
-
     for i in range(total_rows):
         for j in range(total_columns):
             entre = Button(root, width=14, fg='black',font=('Arial',12,'bold'),text=str(data[i][j]))
@@ -96,16 +95,47 @@ def modifyUsers():
 
 
 def addUser():
-    return 0
+    def check_window_state(window):
+        state = window.state()
+        if state == 'normal':
+            window.destroy()
+
+    import Data
+    data = Data.search()     
+    total_rows = len(data)
+    total_columns = len(data[0])
+    root = Tk()
+    root.title("Ajouter un membre")
+    information = ["ID", "NOM", "PRENOM", "EMAIL", "TELEPHONE", "ADRESSE", "PAIEMENT"]
+    for i in range(7):
+        entre = Button(root, width=14, fg='red', font=('Arial', 12, 'bold'), text=str(information[i]))
+        entre.grid(row=0, column=i+1)
+
+    def insertUser(entries):
+        user_info = [entry.get() for entry in entries]
+        import Data
+        Data.addUser(user_info)  
+
+    entries = []
+    for i in range(len(information)):
+        entry = Entry(root, width=14, fg='red', font=('Arial', 11, 'bold'))
+        entry.grid(row=1, column=i+1)
+        entries.append(entry)
+    button = Button(root, width=14, fg='red', font=('Arial', 11, 'bold'), text="Ajouter",
+                    command=lambda: (insertUser(entries), check_window_state(root)))
+    button.grid(row=1, column=0)  
+    # Afficher les utilisateurs existants
+    for i in range(total_rows):
+        for j in range(total_columns):  
+            button = Button(root, width=14, fg='black', font=('Arial', 11, 'bold'), text=str(data[i][j]))
+            button.grid(row=i + 2, column=j+1)
+
+
+
 
 def getWindow():
     from main import getwindow
     return getwindow()
-
-def updateUser():
-    return 0 
-
-
 
 def app():
    
@@ -124,7 +154,7 @@ def app():
 
     submit = Button(window2, text="Consulter la liste des membres",bg=backgrounf_color_buttons, command=searchUsers).place(x=50, y=80)
     submit2 = Button(window2, text="Supprimer des membres",bg=backgrounf_color_buttons, command=deleteUsers).place(x=50, y=150)
-    submit3 = Button(window2, text="Ajouter des membres",bg=backgrounf_color_buttons).place(x=50, y=210)
+    submit3 = Button(window2, text="Ajouter des membres",bg=backgrounf_color_buttons,command=addUser).place(x=50, y=210)
     submit4 = Button(window2, text="Modifier des membres",bg=backgrounf_color_buttons,command=modifyUsers).place(x=50, y=280)
 
 

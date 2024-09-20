@@ -9,8 +9,6 @@ def check_log():
         window.destroy()
         application.app()
 
-
-
 window = Tk()
 frame_name = Frame(window)
 number1 = StringVar()
