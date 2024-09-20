@@ -45,25 +45,25 @@ BrothersGym est une application de gestion d'une salle de sport qui permet aux a
 
 **Page de connexion**
 
-<img src="img/img1.png" width="400"/>
-<img src="img/img2.png" width="400"/>
+<img src="img/img1.png" width="500"/>
+<img src="img/img2.png" width="500"/>
 
 **Page d'accueil**
 
-<img src="img/img3.png" width="400"/>
+<img src="img/img3.png" width="500"/>
 
 **Liste des membres**
 
-<img src="img/img4.png" width="400"/>
+<img src="img/img4.png" width="500"/>
 
 **Supprimer des membres**
 
-<img src="img/img5.png" width="400"/>
+<img src="img/img5.png" width="500"/>
 
 **Ajouter des membres**
 
-<img src="img/img6.png" width="400"/>
+<img src="img/img6.png" width="500"/>
 
 **Modifier des membres**
 
-<img src="img/img7.png" width="400"/>
+<img src="img/img7.png" width="500"/>
